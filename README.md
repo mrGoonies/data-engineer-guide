@@ -58,6 +58,42 @@ Este tipo de base de datos surgió en la década del 70 por un investigador de I
 > **_NOTE:_**  Para interactuar con una base de datos relación haremos uso de un lenguaje (previamente mencionado) llamado SQL (Structured Query Language), el cual es un lenguaje declarativo.
 
 ### Bases de datos no relacionales
+Este tipo de bases de datos surgió en la década del 2000, ya que se necesitaba una forma de almacenar datos no estructurados de forma eficiente, otra característica es su flexibilidad, ya que no poseen un SCHEMA (estructura) definida. Existen distintos tipos de bases de datos no relacionales, las cuales son:
+
+- Bases de datos orientadas a documentos (MongoDB, CouchDB, etc)
+    - Almacenan datos en documentos, los cuales pueden ser de distintos tipos como lo puede ser JSON, XML, etc.
+
+- Bases de datos orientadas a grafos (Neo4j, etc)
+    - Almacenan datos en nodos y relaciones, por lo que son muy buenas para almacenar datos que tengan una relación entre si.
+
+- Bases de datos orientadas a columnas (Cassandra, etc)
+    - Almacenan datos en columnas, por lo que son muy buenas para almacenar datos que tengan una relación entre si.
+
+- Bases de datos orientadas a llave-valor (Redis, etc)
+    - Almacenan datos en llaves y valores, por lo que son muy buenas para almacenar datos que tengan una relación entre si.
+
+### Tendencias modernas
+1. Data Warehouse
+    - Es un repositorio que almacena datos previamente procesados, los cuales se utilizan para realizar análisis y generar informes o dashboard, entrenamiento de modelos de ML, etc. Este tipo de repositorio de datos se basa en el modelo relacional, por lo que es muy bueno para almacenar datos estructurados.
+     
+2. Data Lake
+    - Es un repositorio que almacena datos en bruto y listos para ser procesados, por lo que es muy bueno para almacenar datos no estructurados. Este tipo de repositorio de datos se basa en el modelo no relacional, por lo que es muy bueno para almacenar datos no estructurados.
+
+3. Data LakeHouse
+    - Es un repositorio que almacena datos en bruto y procesados (combinación entre un Data Warehouse y Data Lake), por lo que es muy bueno para almacenar datos estructurados y no estructurados. Este tipo de repositorio de datos se basa en el modelo relacional y no relacional.
+
+> **_NOTE:_**  En la actualidad existen distintas herramientas que permiten crear un Data Warehouse, Data Lake o Data LakeHouse, las cuales son:
+> - Data Warehouse: Redshift, Snowflake, BigQuery, etc.
+> - Data Lake: S3, Azure Data Lake, etc.
+> - Data LakeHouse: Delta Lake, etc.
+
+4. Seguridad y cumplimiento de normas
+    - En la actualidad existen distintas normas que regulan el uso de datos, por lo que es fundamental que un data engineer conozca sobre estas normas y como aplicarlas en un proyecto de datos, ya que de lo contrario puede traer problemas legales a la organización. Algunas de las normas mas conocidas son:
+        - GDPR
+        - HIPAA
+        - CCPA
+        - LGPD
+        - etc.
 
 
 
