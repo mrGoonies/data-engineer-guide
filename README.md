@@ -21,7 +21,7 @@ Para dar un poco de contexto sobre lo que es un ingenier@ de datos, este es el p
 En la actualidad existen varios roadmap para convertite en un data engineer y en ocasiones se olvidan las habilidades fundamentales, ya que priorizan el aprendizaje de herramientas como lo puede ser *PySpark*, *Airflow*, *contendedores*, *orquestadores*, CI/CD, entre otras cosas que debería tener un data engineer para poder desempeñarse en el mundo real, pero cada empresa trabaja de una forma distinta y es por eso que tener unas bases solidas es la prioridad para cualquier aspirante a este rol, por lo que, en este apartado se mencionaran las habilidades que necesitas tener como un data engineer aspirante a un puesto profesional.
 
 - Habilidades de comunicación
-    - Debemos conocer el negocio y saber comunicarnos con distintos perfiles, ya sean tecnicos como no tecnicos, por ende conocer nuestra audiencia es fundamental y sobretodo el como les presentaremos la información. Existe un diagrama el cual representa muy bien este punto.
+    - Debemos conocer el negocio y saber comunicarnos con distintos perfiles, ya sean técnicos como no técnicos, por ende conocer nuestra audiencia es fundamental y sobretodo el como les presentaremos la información. Existe un diagrama el cual representa muy bien este punto.
     ![Pirámide para comunicar información efectivamente](https://i.pinimg.com/736x/2d/47/ca/2d47ca71cb7fc10f188313f3b7685233.jpg)
 
     - Se debe priorizar la empatía con nuestra audiencia, esto nos permitirá entender sus necesidades y poder comunicar la información de manera efectiva.
@@ -31,7 +31,7 @@ En la actualidad existen varios roadmap para convertite en un data engineer y en
 
     - Conocer sobre bases de datos relaciones y no relaciones. También aprender sobre el modelado de datos y diagrama Entidad Relación (ER).
 
-    - SQL es por excelencia el lenguaje que mas vas a utilizar como data engineer, ya que esta implementado en distintas herramientas como lo puede ser DBT y es por esto que es fundamental conocer sobre DDL (Definiton Data Language) y DML (Data Manipulation Language).
+    - SQL es por excelencia el lenguaje que mas vas a utilizar como data engineer, ya que esta implementado en distintas herramientas como lo puede ser DBT y es por esto que es fundamental conocer sobre DDL (Definition Data Language) y DML (Data Manipulation Language).
 
     - En la era moderna, la gran mayoría de las empresas trabajan con la nube, y es por esto que te recomienda que elijas aprender algún proveedor de nube como lo puede ser **AWS**, **Azure** o GCP. Generalmente utilizaras servicios como computo (Maquinas Virtuales), servicios basados en Serverless, almacenar datos en Data Lakes (como lo puede ser un S3 de AWS), bases de datos administradas (como lo puede ser un RDS de AWS), entre otros servicios que te permitirán construir una arquitectura de datos robusta. No te centres en obtener una certificación, enfocarte en saber como aplicar estos servicios y aplicarlas en un proyecto personal o una prueba de concepto.
 
@@ -99,7 +99,7 @@ Este tipo de bases de datos surgió en la década del 2000, ya que se necesitaba
         - etc.
 
 # Procesamiento de datos
-El procesamiento de datos es una técnica que permite transformar datos brutos en información útil para una organización y su toma de desiciones. En la actualidad existen distintas formas de procesar datos y cada una de ellas tiene sus ventajas y desventajas, por ende juega un papel importante para un Data Engineer, ya que nos permitirá saber como podemos procesar los datos. En esta sección se hablaran de las formas mas comunes de procesar datos, tipos de procesamiento y como se relacionan con el mundo de los datos.
+El procesamiento de datos es una técnica que permite transformar datos brutos en información útil para una organización y su toma de decisiones. En la actualidad existen distintas formas de procesar datos y cada una de ellas tiene sus ventajas y desventajas, por ende juega un papel importante para un Data Engineer, ya que nos permitirá saber como podemos procesar los datos. En esta sección se hablaran de las formas mas comunes de procesar datos, tipos de procesamiento y como se relacionan con el mundo de los datos.
 
 ## Tipos de procesamiento de datos
 En la actualidad existen tres tipos de procesamiento de datos, los cuales son:
@@ -114,7 +114,7 @@ En la actualidad existen tres tipos de procesamiento de datos, los cuales son:
 Ambos sistemas son muy utilizados en un mundo basado en datos, su conocimiento es fundamental para reconocer cuando se aplica cada uno de ellos. A continuación, se detallan las características de cada uno de ellos:
 
 - OLAP (Online Analytical Processing)
-    - Es un procesamiento análitico de los datos, por lo cual se realizan consultas para obtener información y analizar los resultados con el objetivo de entregar informes o dashboard para la toma de desiciones.
+    - Es un procesamiento analítico de los datos, por lo cual se realizan consultas para obtener información y analizar los resultados con el objetivo de entregar informes o dashboard para la toma de decisiones.
 
 - OLTP (Online Transaction Processing)
     - Es una tecnología que permite almacenar datos de forma rápida y segura, por lo cual se realizan operaciones de inserción, actualización y eliminación de datos. Su uso más común se encuentra en el registro financiero, reservas de vuelos, suscripciones a servicios, comentario de clientes, etc. Para este tipo de sistemas se utilizan bases de datos relacionales por eficiencia a la hora de realizar transacciones.
@@ -126,9 +126,10 @@ Es un concepto aplicado a todos los procesos que se realizan en el mundo de los 
     - Este tipo de data pipeline se basa en escribir código para realizar las distintas tareas que se requieran, por lo que es muy bueno cuando nuestro proceso de ETL o ELT sean escalables, personalizadas, tener un control total sobre el proceso. Para este tipo de data pipeline se utilizan lenguajes de programación como lo puede ser **Python**, Java, Scala, etc.
 
 - Data Pipeline basado en herramientas
-    - Al igual que un data pipeline basado en código, si necesitamos crear un proceso rápidamente y no necesitamos personalizarlo, también podemos hacer uso de orquestadores como los puede ser Airflow y Apache NiFi, y estándarizar procesos.
+    - Al igual que un data pipeline basado en código, si necesitamos crear un proceso rápidamente y no necesitamos personalizarlo, también podemos hacer uso de orquestadores como los puede ser Airflow y Apache NiFi, y estandarizar procesos.
 
 # Lenguaje SQL
+SQL es un lenguaje para interactuar con bases de datos relacionales y por ende, bastante necesario para poder desempeñarse como un data engineer. 
 
 # Contribuciones
 ¡Gracias por tu interés en contribuir al repositorio! Tu participación es importante ya que nos ayudas a todos los participantes del Bootcamp y también las personas nuevas que encuentren este repo, ademas contribuyes al aprendizaje conjunto de la comunidad. A continuación, se detallan las pautas para contribuir:
