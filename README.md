@@ -2,8 +2,11 @@
 
 1. [Introducción](#introducción)
 2. [Skills fundamentales de un Data Engineer](#skills-fundamentales-de-un-data-engineer)
-3. [Contribuciones](#contribuciones)
-4. [Licencia](#licencia)
+3. [Almacenamiento de datos](#almacenamiento-de-datos)
+4. [Procesamiento de datos](#procesamiento-de-datos)
+5. [Lenguaje SQL](#lenguaje-sql)
+5. [Contribuciones](#contribuciones)
+6. [Licencia](#licencia)
 
 # Introducción
 
@@ -95,7 +98,37 @@ Este tipo de bases de datos surgió en la década del 2000, ya que se necesitaba
         - LGPD
         - etc.
 
+# Procesamiento de datos
+El procesamiento de datos es una técnica que permite transformar datos brutos en información útil para una organización y su toma de desiciones. En la actualidad existen distintas formas de procesar datos y cada una de ellas tiene sus ventajas y desventajas, por ende juega un papel importante para un Data Engineer, ya que nos permitirá saber como podemos procesar los datos. En esta sección se hablaran de las formas mas comunes de procesar datos, tipos de procesamiento y como se relacionan con el mundo de los datos.
 
+## Tipos de procesamiento de datos
+En la actualidad existen tres tipos de procesamiento de datos, los cuales son:
+
+- Procesamiento de datos por lotes (Batch)
+    - Este tipo de procesamiento de datos se basa en procesar datos en un intervalo de tiempo definido (como lo puede ser la cartola de cuenta bancaria), por lo que es muy bueno para procesar datos que no necesitan ser procesados en tiempo real. Este tipo de procesamiento de datos se basa en el modelo relacional, por lo que es muy bueno para procesar datos estructurados.
+
+- Procesamiento de datos en tiempo real (Streaming)
+    - Este tipo de procesamiento de datos se basa en procesar datos en tiempo real (como lo puede ser un sistema de detección de fraude), por lo que es muy bueno para procesar datos que necesitan ser procesados en tiempo real. Este tipo de procesamiento de datos se basa en el modelo no relacional, por lo que es muy bueno para procesar datos no estructurados.
+
+## Sistema OLAP y OLTP
+Ambos sistemas son muy utilizados en un mundo basado en datos, su conocimiento es fundamental para reconocer cuando se aplica cada uno de ellos. A continuación, se detallan las características de cada uno de ellos:
+
+- OLAP (Online Analytical Processing)
+    - Es un procesamiento análitico de los datos, por lo cual se realizan consultas para obtener información y analizar los resultados con el objetivo de entregar informes o dashboard para la toma de desiciones.
+
+- OLTP (Online Transaction Processing)
+    - Es una tecnología que permite almacenar datos de forma rápida y segura, por lo cual se realizan operaciones de inserción, actualización y eliminación de datos. Su uso más común se encuentra en el registro financiero, reservas de vuelos, suscripciones a servicios, comentario de clientes, etc. Para este tipo de sistemas se utilizan bases de datos relacionales por eficiencia a la hora de realizar transacciones.
+
+## Data Pipelines
+Es un concepto aplicado a todos los procesos que se realizan en el mundo de los datos. Un data pipeline es un conjunto de procesos que permiten extraer, transformar y cargar datos desde una o varias fuentes de datos a un destino de datos o comúnmente llamado data warehouse. En la actualidad existen distintas formas de crear un data pipeline, las cuales son:
+
+- Data Pipeline basado en código
+    - Este tipo de data pipeline se basa en escribir código para realizar las distintas tareas que se requieran, por lo que es muy bueno cuando nuestro proceso de ETL o ELT sean escalables, personalizadas, tener un control total sobre el proceso. Para este tipo de data pipeline se utilizan lenguajes de programación como lo puede ser **Python**, Java, Scala, etc.
+
+- Data Pipeline basado en herramientas
+    - Al igual que un data pipeline basado en código, si necesitamos crear un proceso rápidamente y no necesitamos personalizarlo, también podemos hacer uso de orquestadores como los puede ser Airflow y Apache NiFi, y estándarizar procesos.
+
+# Lenguaje SQL
 
 # Contribuciones
 ¡Gracias por tu interés en contribuir al repositorio! Tu participación es importante ya que nos ayudas a todos los participantes del Bootcamp y también las personas nuevas que encuentren este repo, ademas contribuyes al aprendizaje conjunto de la comunidad. A continuación, se detallan las pautas para contribuir:
