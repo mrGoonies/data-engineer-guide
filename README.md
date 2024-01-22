@@ -349,22 +349,22 @@ Ahora que hemos visto de forma gradual los tipos de datos que podemos usar en My
 Para insertar datos en una tabla, puedes utilizar el comando INSERT INTO. Aquí hay un ejemplo:
 
  ```sql
-INSERT INTO nombre_de_la_tabla (columna1, columna2, columna3) VALUES ('valor1', 'valor2', 'valor3');
+ INSERT INTO nombre_de_la_tabla (columna1, columna2, columna3) VALUES ('valor1', 'valor2', 'valor3');
 ```
 - Leer (Read):
 Para leer datos de una tabla, puedes utilizar el comando SELECT. Aquí tienes un ejemplo básico:
  ```sql
-SELECT * FROM nombre_de_la_tabla;
+ SELECT * FROM nombre_de_la_tabla;
 ```
 - Actualizar (Update):
 Para actualizar datos en una tabla, puedes utilizar el comando UPDATE. Aquí tienes un ejemplo:
  ```sql
-UPDATE nombre_de_la_tabla SET columna1 = 'nuevo_valor' WHERE condicion;
+ UPDATE nombre_de_la_tabla SET columna1 = 'nuevo_valor' WHERE condicion;
 ```
 - Eliminar (Delete):
 Para eliminar datos de una tabla, puedes utilizar el comando DELETE. Aquí tienes un ejemplo:
  ```sql
-DELETE FROM nombre_de_la_tabla WHERE condicion;
+ DELETE FROM nombre_de_la_tabla WHERE condicion;
 
 ```
 
