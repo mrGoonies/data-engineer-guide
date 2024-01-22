@@ -129,7 +129,224 @@ Es un concepto aplicado a todos los procesos que se realizan en el mundo de los 
     - Al igual que un data pipeline basado en código, si necesitamos crear un proceso rápidamente y no necesitamos personalizarlo, también podemos hacer uso de orquestadores como los puede ser Airflow y Apache NiFi, y estandarizar procesos.
 
 # Lenguaje SQL
-SQL es un lenguaje para interactuar con bases de datos relacionales y por ende, bastante necesario para poder desempeñarse como un data engineer. 
+SQL es un lenguaje para interactuar con bases de datos relacionales y por ende, bastante necesario para poder desempeñarse como un data engineer. Para tener algo de contexto, este lenguaje fue desarrollado por IBM en la década del 70 com un refinamiento del lenguaje propuesto por el creador del modelo relacional, ademas se puede decir que este lenguaje es declarativo, esto quiere decir que nos enfocaremos en especificar lo que queremos hacer y no tanto en como lo queremos hacer. En esta sección se hablaran de las formas mas comunes de utilizar SQL, tipos de bases de datos y como se relacionan con el mundo de los datos.
+
+Para poder arrancar a trabajar con este lenguaje se recomienda tener instalado un motor de bases de datos relacional en tu maquina local, para esto, utilizaremos el RDBMS **MySQL** pero existen otros motores como los pueden ser **PostgreSQL**, **SQL Server**, **Oracle**, etc. Existen dos formas de instalar este motor de bases de datos, las cuales son:
+
+1. Instalación local
+    - Para esto, debes descargar el instalador de MySQL desde su pagina oficial, el cual lo puedes encontrar [aquí](https://dev.mysql.com/downloads/installer/). Una vez descargado, debes seguir los pasos que te indica el instalador y listo, ya tienes instalado MySQL en tu maquina local. Te recomiendo [instalar el motor de base de datos](https://dev.mysql.com/downloads/mysql/), el cual viene por defecto con el cliente basado en shell, ya que es muy útil para aprender SQL.
+
+    - Una vez instalado, haremos uso del cliente basado en shell para poder interactuar con el motor de base de datos, para esto, debes ejecutar el siguiente comando en tu terminal:
+    ```bash
+    mysql -u root -p
+    ```
+
+
+2. Contenedor
+    - Se recomienda tener instalado Docker en tu maquina local, ya que es una herramienta muy útil para poder trabajar con contenedores. Una vez instalado, debes ejecutar el siguiente comando en tu terminal:
+    ```bash
+    docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
+    ```
+    - Este comando creara un contenedor con el nombre **mysql** y la contraseña **123456** para el usuario **root**. Una vez creado el contenedor, debes ejecutar el siguiente comando para poder acceder al contenedor:
+    ```bash
+    docker exec -it mysql bash
+    ```
+    - Este comando te permitirá acceder al contenedor y ejecutar comandos en el, por lo que debes ejecutar el siguiente comando para poder acceder a la base de datos:
+    ```bash
+    mysql -u root -p
+    ```
+
+
+### Sentencias básicas
+Ahora escribiremos algunas sentencias en SQL para entrar en calor y ver su funcionamiento, para esto, debes ejecutar el siguiente comando en tu terminal:
+
+> **_NOTE:_** Yo escribo todas las sentencias o palabras reservadas del lenguaje SQL en mayúsculas, pero esto es opcional, ya que el lenguaje SQL es insensible a mayúsculas y minúsculas. Pero es altamente recomendable para mejorar la legibilidad del código.
+
+- Mostrar todas las bases de datos existentes
+```bash
+SHOW DATABASES;
+```
+
+- Especiificar la base de datos a utilizar
+```bash
+USE <nombre-de-la-base-de-datos>;
+```
+
+- Obtener la versión del motor de base de datos
+```bash
+SELECT VERSION();
+```
+
+- Obtener la fecha y hora actual del servidor MySQL
+```bash
+SELECT NOW();
+```
+
+- Para salir del cliente basado en shell
+```bash
+exit
+```
+
+### Tipos de datos en MySQL
+En la actualidad existen distintos tipos de datos que se pueden almacenar en una base de datos, por lo que es fundamental conocerlos para poder utilizarlos de manera correcta sobretodo cuando tengamos que crear tablas. A continuación, se detallan los tipos de datos que se pueden almacenar en MySQL:
+
+- Cadenas de texto
+    Alguno de los tipos de datos poseen un tamaño fijo y otros variables, es decir, algunos tipos rellenaran con espacios en blanco hasta completar el tamaño fijo y otros solo los caracteres que se necesiten.
+
+    - **CHAR**
+        - Es un tipo de dato de tamaño fijo, por lo que rellenara con espacios en blanco hasta completar el tamaño fijo.
+        - El tamaño máximo es de *255* caracteres.
+        - Se utiliza para almacenar cadenas de texto de longitud fija, un ejemplo puede ser las siglas de un estado, ya que todas estas poseen un largo similar.
+        - Ejemplo de como definir un campo de tipo CHAR con una longitud de 10 caracteres:
+        ```bash
+        CHAR(10)
+        ```
+    - **VARCHAR**
+        - Es un tipo de dato de tamaño variable, por lo que solo rellenara con los caracteres que se necesiten.
+        - El tamaño máximo es de *65.535* caracteres.
+        - Se utiliza para almacenar cadenas de texto de longitud variable, un ejemplo puede ser el nombre de una persona, ya que este puede tener un largo variable.
+        - Ejemplo de como definir un campo de tipo VARCHAR con una longitud de 10 caracteres:
+        ```bash
+        VARCHAR(10)
+        ```
+
+- Texto
+    Este tipo de datos se diferencian de los anteriores, ya que no poseen un tamaño fijo o variable, por lo que no se especifica un tamaño máximo, pero internamente poseen un tamaño máximo.
+
+    - **TINYTEXT**
+        - El tamaño máximo es de *255* caracteres.
+        - Ejemplo de como definir un campo de tipo TINYTEXT:
+        ```bash
+        TINYTEXT
+        ```
+
+    - **TEXT**
+        - El tamaño máximo es de *65.535* caracteres.
+        - Ejemplo de como definir un campo de tipo TEXT:
+        ```bash
+        TEXT
+        ```
+    - **MEDIUMTEXT**
+        - El tamaño máximo es de *16.777.215* caracteres.
+        - Ejemplo de como definir un campo de tipo MEDIUMTEXT:
+        ```bash
+        MEDIUMTEXT
+        ```
+    - **LONGTEXT**
+        - El tamaño máximo es de *4.294.967.295* caracteres.
+        - Ejemplo de como definir un campo de tipo LONGTEXT:
+        ```bash
+        LONGTEXT
+        ```
+    
+    > **_NOTE:_**  Consideracion a tener en cuenta cuando trabajamos con estos tipos de datos:
+    > - Si superamos el tamaño máximo, los datos serán truncados.
+    > - Los espacio en blanco al final de la cadena de texto no son eliminados y estos cuentan como caracteres. En caso contrario a los tipos de datos de cadenas de texto.
+    > - Los tipos de datos de texto son mas lentos que los tipos de datos de cadenas de texto.
+    > - Cada motor de base de datos implementa este tipos de datos a su forma, por eso es recomendable leer la documentación del motor de base de datos que estemos utilizando.
+
+- Números
+    MySQL nos provee de dos conjuntos de tipos de datos numéricos, los cuales son:
+
+    - **Enteros**
+        - *TINYINT*
+            - El tamaño máximo es de *255* caracteres.
+            - Podemos hacer uso de la palabra reservada **UNSIGNED** para especificar que el campo solo puede almacenar números positivos. El cual tendremos un rango de *0* a *255* o a su vez podemos hacer uso de la palabra reservada **SIGNED** (que viene por defecto) para especificar que el campo puede almacenar números positivos y negativos. El cual tendremos un rango de *-128* a *127*.
+
+        - *SMALLINT*
+            - El tamaño máximo es de *65.535* caracteres.
+            - Podemos hacer uso de la palabra reservada **UNSIGNED** para especificar que el campo solo puede almacenar números positivos. El cual tendremos un rango de *0* a *65.535* o a su vez podemos hacer uso de la palabra reservada **SIGNED** (que viene por defecto) para especificar que el campo puede almacenar números positivos y negativos. El cual tendremos un rango de *-32.768* a *32.767*.
+        
+        - *MEDIUMINT*
+            - El tamaño máximo es de *16.777.215* caracteres.
+            - Podemos hacer uso de la palabra reservada **UNSIGNED** para especificar que el campo solo puede almacenar números positivos. El cual tendremos un rango de *0* a *16.777.215* o a su vez podemos hacer uso de la palabra reservada **SIGNED** (que viene por defecto) para especificar que el campo puede almacenar números positivos y negativos. El cual tendremos un rango de *-8.388.608* a *8.388.607*.
+        
+        - *INT*
+            - El tamaño máximo es de *4.294.967.295* caracteres.
+            - Podemos hacer uso de la palabra reservada **UNSIGNED** para especificar que el campo solo puede almacenar números positivos. El cual tendremos un rango de *0* a *4.294.967.295* o a su vez podemos hacer uso de la palabra reservada **SIGNED** (que viene por defecto) para especificar que el campo puede almacenar números positivos y negativos. El cual tendremos un rango de *-2.147.483.648* a *2.147.483.647*.
+        
+        - *BIGINT*
+            - El tamaño máximo es de *18.446.744.073.709.551.615* caracteres.
+            - Podemos hacer uso de la palabra reservada **UNSIGNED** para especificar que el campo solo puede almacenar números positivos. El cual tendremos un rango de *0* a *18.446.744.073.709.551.615* o a su vez podemos hacer uso de la palabra reservada **SIGNED** (que viene por defecto) para especificar que el campo puede almacenar números positivos y negativos. El cual tendremos un rango de *-9.223.372.036.854.775.808* a *9.223.372.036.854.775.807*.
+        
+    > **_NOTE:_** Consideracion a tener en cuenta cuando trabajamos con estos tipos de datos:
+    > - Si superamos el tamaño máximo, los datos serán truncados.
+    > - Los tipos de datos de números son mas rápidos que los tipos de datos de texto (Los motores de RDBMS están optimizados para trabajar con este tipo de datos).
+    > - Es recomendable utilizar el tipo de dato que mejor se adapte a la necesidad, ya que si utilizamos un tipo de dato que no se adapte a la necesidad, estaremos desperdiciando recursos.
+
+    - **Decimales**
+        Esta categoría de tipos de datos nos permite almacenar números con decimales, por lo que es muy bueno para almacenar valores monetarios, ya que no perderemos precisión y podemos asignar el tamaño de los decimales que queremos almacenar.
+        - *FLOAT*
+            - El tamaño máximo es de *4 bytes*.
+            - Podemos hacer uso de la palabra reservada **UNSIGNED** para especificar que el campo solo puede almacenar números positivos. El cual tendremos un rango de *0* a *4.294.967.295* o a su vez podemos hacer uso de la palabra reservada **SIGNED** (que viene por defecto) para especificar que el campo puede almacenar números positivos y negativos. El cual tendremos un rango de *-2.147.483.648* a *2.147.483.647*.
+            
+
+            - *float(10,2) -> 1234567890.12*
+        
+        - *DOUBLE*
+            - El tamaño máximo es de *8 bytes*.
+            - Podemos hacer uso de la palabra reservada **UNSIGNED** para especificar que el campo solo puede almacenar números positivos. El cual tendremos un rango de *0* a *18.446.744.073.709.551.615* o a su vez podemos hacer uso de la palabra reservada **SIGNED** (que viene por defecto) para especificar que el campo puede almacenar números positivos y negativos. El cual tendremos un rango de *-9.223.372.036.854.775.808* a *9.223.372.036.854.775.807*.
+
+            - *double(10,2) -> 1234567890.12*
+          
+
+- Datos Temporales
+    Este tipo de dato hace referencia a fechas y/u horas y se diferencian de los anteriores, ya que no poseen un tamaño fijo o variable, por lo que no se especifica un tamaño máximo, pero internamente poseen un tamaño máximo. A continuación, se detallan los tipos de datos temporales que se pueden almacenar en MySQL:
+
+    - **DATE**
+        - Su formato por defecto es *YYYY-MM-DD*.
+        - Posee un rango de *1000-01-01* a *9999-12-31*.
+
+    - **TIME**
+        - Su formato por defecto es *HHH:MI:SS*.
+        - Posee un rango de *-838:59:59* a *838:59:59*.      
+
+    - **YEAR**
+        - Su formato por defecto es *YYYY*.
+        - Posee un rango de *1901* a *2155*.  
+    
+    - **DATETIME**
+        - Su formato por defecto es *YYYY-MM-DD HH:MI:SS*.
+        - Posee un rango de *1000-01-01 00:00:00* a *9999-12-31 23:59:59*.
+    
+    - **TIMESTAMP**
+        - Su formato por defecto es *YYYY-MM-DD HH:MI:SS*.
+        - Posee un rango de *1970-01-01 00:00:01* a *2038-01-19 03:14:07*.
+    
+    > **_NOTE:_**  La diferencia entre **DATETIME** y **TIMESTAMP** es que **DATETIME** almacena la fecha y hora en la zona horaria especificada y **TIMESTAMP** almacena la fecha y hora en UTC (Coordinated Universal Time). Por lo que **TIMESTAMP** es muy bueno para almacenar la fecha y hora en la que se realizo una transacción, ya que no importa la zona horaria del usuario, siempre se almacenara en UTC.
+
+    Algunos ejemplos donde podemos utilizar este tipo de datos son:
+
+    - Fecha de nacimiento.
+    - Fecha de creación, modificación y eliminación de un registro.
+    - Fecha de inicio y termino de un evento.
+    - Fecha y hora del envío de un producto.
+
+Estos son algunos tipos en los cuales pasaremos la mayor parte del tiempo trabajando, pero existen otros tipos de datos que se pueden almacenar en MySQL, los cuales son:
+
+- **ENUM**
+    - Este tipo de dato nos permite almacenar una lista de valores, por lo que es muy bueno para almacenar datos que tengan un conjunto de valores definidos. Estos pueden ser como lo puede ser el estado civil de una persona, ya que este solo puede tener un conjunto de valores definidos.
+    - Ejemplo de como definir un campo de tipo ENUM:
+    ```bash
+    ENUM('valor1', 'valor2', 'valor3')
+    ```
+
+- **BINARY**
+    - Este tipo de dato nos permite almacenar datos binarios, como los puede ser una imagen, un archivo, etc.
+
+- **JSON**
+    - Este tipo de dato nos permite almacenar datos en formato JSON, por lo que es muy bueno para almacenar datos no estructurados.
+
+- **BOOLEAN**
+    - Este tipo de dato nos permite almacenar datos booleanos, como los puede ser *true* o *false*.
+
+Ahora que hemos visto de forma gradual los tipos de datos que podemos usar en MySQL (tambien existen en otros motores pero pueden haber extensiones), es hora de aprender a crear tablas, en conjunto de consideraciones a tener en cuenta.
+
+### Crear tablas
+
+
+
+
 
 # Contribuciones
 ¡Gracias por tu interés en contribuir al repositorio! Tu participación es importante ya que nos ayudas a todos los participantes del Bootcamp y también las personas nuevas que encuentren este repo, ademas contribuyes al aprendizaje conjunto de la comunidad. A continuación, se detallan las pautas para contribuir:
