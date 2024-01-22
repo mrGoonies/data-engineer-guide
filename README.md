@@ -342,7 +342,31 @@ Estos son algunos tipos en los cuales pasaremos la mayor parte del tiempo trabaj
 
 Ahora que hemos visto de forma gradual los tipos de datos que podemos usar en MySQL (tambien existen en otros motores pero pueden haber extensiones), es hora de aprender a crear tablas, en conjunto de consideraciones a tener en cuenta.
 
-### Crear tablas
+### **CRUD**:
+ Es un acrónimo que representa las operaciones básicas realizadas en sistemas de gestión de bases de datos: Create (Crear), Read (Leer), Update (Actualizar) y Delete (Eliminar). Aquí te proporcionaré ejemplos de cómo realizar estas operaciones en MySQL.
+
+ - Crear (Create):
+Para insertar datos en una tabla, puedes utilizar el comando INSERT INTO. Aquí hay un ejemplo:
+
+ ```sql
+INSERT INTO nombre_de_la_tabla (columna1, columna2, columna3) VALUES ('valor1', 'valor2', 'valor3');
+```
+- Leer (Read):
+Para leer datos de una tabla, puedes utilizar el comando SELECT. Aquí tienes un ejemplo básico:
+ ```sql
+SELECT * FROM nombre_de_la_tabla;
+```
+- Actualizar (Update):
+Para actualizar datos en una tabla, puedes utilizar el comando UPDATE. Aquí tienes un ejemplo:
+ ```sql
+UPDATE nombre_de_la_tabla SET columna1 = 'nuevo_valor' WHERE condicion;
+```
+- Eliminar (Delete):
+Para eliminar datos de una tabla, puedes utilizar el comando DELETE. Aquí tienes un ejemplo:
+ ```sql
+DELETE FROM nombre_de_la_tabla WHERE condicion;
+
+```
 
 
 
