@@ -269,7 +269,7 @@ En la actualidad existen distintos tipos de datos que se pueden almacenar en una
             - El tamaño máximo es de *18.446.744.073.709.551.615* caracteres.
             - Podemos hacer uso de la palabra reservada **UNSIGNED** para especificar que el campo solo puede almacenar números positivos. El cual tendremos un rango de *0* a *18.446.744.073.709.551.615* o a su vez podemos hacer uso de la palabra reservada **SIGNED** (que viene por defecto) para especificar que el campo puede almacenar números positivos y negativos. El cual tendremos un rango de *-9.223.372.036.854.775.808* a *9.223.372.036.854.775.807*.
         
-    > **_NOTE:_** Consideracion a tener en cuenta cuando trabajamos con estos tipos de datos:
+    > **_NOTE:_** Consideración a tener en cuenta cuando trabajamos con estos tipos de datos:
     > - Si superamos el tamaño máximo, los datos serán truncados.
     > - Los tipos de datos de números son mas rápidos que los tipos de datos de texto (Los motores de RDBMS están optimizados para trabajar con este tipo de datos).
     > - Es recomendable utilizar el tipo de dato que mejor se adapte a la necesidad, ya que si utilizamos un tipo de dato que no se adapte a la necesidad, estaremos desperdiciando recursos.
@@ -340,12 +340,63 @@ Estos son algunos tipos en los cuales pasaremos la mayor parte del tiempo trabaj
 - **BOOLEAN**
     - Este tipo de dato nos permite almacenar datos booleanos, como los puede ser *true* o *false*.
 
-Ahora que hemos visto de forma gradual los tipos de datos que podemos usar en MySQL (tambien existen en otros motores pero pueden haber extensiones), es hora de aprender a crear tablas, en conjunto de consideraciones a tener en cuenta.
+Ahora que hemos visto de forma gradual los tipos de datos que podemos usar en MySQL (también existen en otros motores pero pueden haber extensiones), es hora de aprender a crear tablas, en conjunto de consideraciones a tener en cuenta.
 
 ### Crear tablas
+El proceso de creación de tablas es muy importante, ya que si no se realiza de manera correcta, puede traer problemas a futuro. A continuación, mostraré el proceso que se tomara para crear un SCHEMA (conjunto de tablas conectadas entre si) en una base de datos relacional.
 
+#### Diseño de tablas
+ES el primer y mas importante paso para crear una tabla, para esto se recomiendo analizar las entidades (tabla) que utilizaremos y sus atributos (fila), ya que de esto dependerá el diseño de la tabla. Para esto, se recomienda utilizar el diagrama Entidad Relación (ER), el cual es muy utilizado en el mundo de los datos y permite entender de manera rápida la estructura de la base de datos. Para esto te dejo un ejemplo de como se vería el diagrama ER de una base de datos de una E-Commerce.
 
+![Ecommerce-diagrama-er](https://images.ctfassets.net/w6r2i5d8q73s/6RFxjf3FSWuKjK6uubjpoC/1e4bd4395e676175d17ff0c8ca495241/S1_2_3_columns_filled_templates_er_diagram_001)
 
+#### Refinamiento
+Una vez que tengamos el diseño de las tablas, debemos analizar si es necesario realizar algún cambio, ya que de esto dependerá el rendimiento de la base de datos y sobretodo los objetivos de la organización. Para esto, se recomienda analizar los siguientes puntos:
+
+- **Normalización**
+    - Es un proceso que permite eliminar la redundancia de datos, por lo que es muy bueno para mejorar el rendimiento de la base de datos y sobretodo el espacio de almacenamiento. Para esto, se recomienda analizar las tablas y sus atributos, ya que de esto dependerá el proceso de normalización. Para esto, se recomienda utilizar la forma normal (FN), la cual es muy utilizada en el mundo de los datos y permite entender de manera rápida la estructura de la base de datos. Para esto te dejo un ejemplo de como se vería la FN de una base de datos de una E-Commerce. Existen alrededor de 5 formas normales, pero en este caso solo se mostrara hasta la tercera forma normal, ya que es la mas utilizada. 
+
+Una vez de implementada la normalización y el análisis de las entidades de cada tabla, es hora de definir el tipo de datos que utilizaremos para cada atributo, recuerda que debes tener en cuenta el tipo de datos que mejor se adapte a la necesidad, ya que si utilizamos un tipo de dato que no se adapte a la necesidad, estaremos desperdiciando recursos y esto a la hora de tener grandes cantidades de usuario o datos de transacciones, puede traer problemas de rendimiento y escalabilidad.
+
+#### Creación de tablas con SQL
+Este proceso es el mas esperado por todos, ya que por fin meteremos manos al lenguaje de consulta SQL. Para esta sección trabajaremos con el diagrama ER de la E-Commerce que se mostró anteriormente.
+
+Crearemos la base de datos con el nombre **e_commerce** y crearemos las tablas con los siguientes atributos:
+```sql
+CREATE DATABASE e_commerce;
+```
+
+Elegimos la base de datos que creamos anteriormente como nuestro SCHEMA de trabajo.
+```sql
+USE e_commerce;
+```
+
+Creamos la tabla **delivery** con los siguientes atributos:
+```sql
+CREATE TABLE delivery(
+    delivery_id SMALLINT UNSIGNED AUTO_INCREMENT,
+    type ENUM('domicilio', 'presencial'),
+    status ENUM('validado', 'no validado', 'en proceso'),
+    CONSTRAINT pk_delivery PRIMARY KEY(delivery_id)
+);
+```
+1. Creamos la tabla **delivery** con el nombre de la tabla y sus atributos (columnas) se encontraran dentro del paréntesis.
+2. El atributo **delivery_id** es de tipo *SMALLINT* y es *UNSIGNED*, por lo que solo puede almacenar números positivos. Además, este atributo es de tipo *AUTO_INCREMENT*, por lo que cada vez que se inserte un registro en la tabla, este atributo se auto incrementara en 1 y no tendremos que especificar un valor para este atributo.
+3. El atributo **type** es de tipo *ENUM*, por lo que solo puede almacenar los valores especificados en el paréntesis.
+4. El atributo **status** es de tipo *ENUM*, por lo que solo puede almacenar los valores especificados en el paréntesis.
+5. El atributo **delivery_id** es la llave primaria de la tabla, por lo que no puede repetirse y es auto incrementable.
+
+> **_NOTE:_**  Para definir un ID existen dos tipos de formas que se pueden utilizar, las cuales son:
+> - UUID (Universally Unique Identifier) - Basado alfabeto y números.
+> - ID (Identificador único) - Basado unicamente en números.
+> - Se recomienda utilizar la segunda forma (ID), ya que es mas eficiente y fácil de trabajar, ya sea para una base de datos y como para ti.
+
+Una vez ejecutado el comando, debemos ver el siguiente resultado:
+```bash
+SHOW TABLES;
+```
+
+> **_NOTE:_**  Podrás encontrar la definición de la tabla en la carpeta **sql** de este repositorio dentro del archivo **ddl.sql**.
 
 
 # Contribuciones
