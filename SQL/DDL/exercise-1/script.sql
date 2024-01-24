@@ -44,4 +44,4 @@ ALTER TABLE person
 DESC person;
 
 -- Habilitar caracteristica de FK del SCHEMA
-SET FOREIGN_KEY_CHEKS=0;
+SET FOREIGN_KEY_CHEKS=1;
