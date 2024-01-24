@@ -359,15 +359,67 @@ Para leer datos de una tabla, puedes utilizar el comando SELECT. Aquí tienes un
 - Actualizar (Update):
 Para actualizar datos en una tabla, puedes utilizar el comando UPDATE. Aquí tienes un ejemplo:
  ```sql
- UPDATE nombre_de_la_tabla SET columna1 = 'nuevo_valor' WHERE condicion;
+ UPDATE nombre_de_la_tabla SET columna1 = 'nuevo_valor' WHERE condición;
 ```
 - Eliminar (Delete):
 Para eliminar datos de una tabla, puedes utilizar el comando DELETE. Aquí tienes un ejemplo:
  ```sql
- DELETE FROM nombre_de_la_tabla WHERE condicion;
+ DELETE FROM nombre_de_la_tabla WHERE condición;
 
 ```
 
+> **_NOTE:_**  Antes de ejecutar cada sentencia, el servidor de nuestra base de datos realizará tres validaciones antes de ejecutar la sentencia, las cuales son:
+> - Tiene permisos para ejecutar la sentencia.
+> - Tienes permisos para acceder a los datos solicitados.
+> - La sintaxis de la sentencia es correcta.
+
+### Clausulas de consultas
+Las clausulas de consultas son palabras reservadas que nos permiten filtrar los datos que queremos obtener de una tabla, por lo que es muy bueno para obtener datos específicos. A continuación, se detallan las clausulas de consultas que se pueden utilizar en MySQL:
+
+#### Clausula SELECT
+Es la primera clausula que comúnmente se utiliza en una consulta, ya que nos permite seleccionar los campos que queremos obtener de una tabla pero es la ultima clausula que se ejecuta en una consulta, esto es debido a que esta clausula le señala al motor de base de datos que campos queremos obtener de una tabla. Un ejemplo puede ser el siguiente:
+
+```sql
+SELECT * 
+FROM language;
+```
+
+Si la consulta la traducimos al español, seria algo como lo siguiente:
+
+```sql
+Muéstrame todas las columnas y filas dentro de la tabla language.
+```
+
+Otro ejemplo es el siguiente:
+
+```sql
+SELECT 
+    language_id,
+    name,
+    last_update
+FROM language;
+```
+
+Si la consulta la traducimos al español, seria algo como lo siguiente:
+
+```sql
+Muéstrame todos los datos de las columnas language_id, name y last_update dentro de la tabla language.
+```
+
+Ademas de seleccionar campos de una tabla particular, podemos llamar a funciones del propio lenguaje y aplicarlas a una fila en particular. Un ejemplo puede ser el siguiente:
+
+```sql
+SELECT 
+    language_id,
+    language_id * 20 language_id_multiplied_by_20,
+    UPPER(name) name_in_uppercase
+FROM language;
+```
+En la consulta anterior estamos multiplicando el campo language_id por 20 y ademas estamos convirtiendo el campo name a mayúsculas, ambas columnas las estamos renombrando o asignando un *alias* para que sea mas legible el resultado de la consulta.
+
+**Entonces con estos ejemplos podemos concluir que la clausula SELECT nos permite seleccionar los campos que queremos obtener de una tabla o tablas (lo veremos mas adelante).**
+
+#### Clausula FROM
 
 # Contribuciones
 ¡Gracias por tu interés en contribuir al repositorio! Tu participación es importante ya que nos ayudas a todos los participantes del Bootcamp y también las personas nuevas que encuentren este repo, ademas contribuyes al aprendizaje conjunto de la comunidad. A continuación, se detallan las pautas para contribuir:
