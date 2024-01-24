@@ -46,9 +46,19 @@ DESC person;
 -- Habilitar característica de FK del SCHEMA
 SET FOREIGN_KEY_CHEKS=1;
 
--- Poblando tablas
+-- Poblando tabla person
 INSERT INTO person (person_id, fname, lname, eye_color, birthday)
 VALUES (NULL, 'William', 'Turner', 'BR', '1927-05-27');
+
+INSERT INTO person 
+    (fname, lname, eye_color, birthday, street, city, state, country, postal_code)
+VALUES 
+    ('Susan', 'Smith', 'BL', '1975-11-02', '23 Maple St.', 'Alington', 'VA', 'USA', '20220');
+
+-- Verificando la nueva inserción
+SELECT *
+FROM person
+WHERE person_id = 2;
 
 -- Verificando inserción de datos
 SELECT *
@@ -60,3 +70,4 @@ VALUES
     (1, 'Pizza'),
     (1, 'Cookies'),
     (1, 'Nachos');
+
