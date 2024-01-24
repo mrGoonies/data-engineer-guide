@@ -53,3 +53,10 @@ VALUES (NULL, 'William', 'Turner', 'BR', '1927-05-27');
 -- Verificando inserción de datos
 SELECT *
 FROM person;
+
+-- Agregando multiples datos a la tabla favorite_food
+INSERT INTO favorite_food
+VALUES 
+    (1, 'Pizza'),
+    (1, 'Cookies'),
+    (1, 'Nachos');
