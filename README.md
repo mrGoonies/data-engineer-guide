@@ -369,9 +369,6 @@ Para eliminar datos de una tabla, puedes utilizar el comando DELETE. Aquí tiene
 ```
 
 
-
-
-
 # Contribuciones
 ¡Gracias por tu interés en contribuir al repositorio! Tu participación es importante ya que nos ayudas a todos los participantes del Bootcamp y también las personas nuevas que encuentren este repo, ademas contribuyes al aprendizaje conjunto de la comunidad. A continuación, se detallan las pautas para contribuir:
 

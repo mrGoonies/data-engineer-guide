@@ -31,3 +31,17 @@ SHOW tables;
 -- Verificar tablas internamente
 DESC person;
 DESC favorite_food;
+
+-- Deshaiblitar momentaneamente opciones de FOREIGN KEY del SCHEMA actual (esto permite modificar columnas de PK)
+SET FOREIGN_KEY_CHEKS=0;
+
+
+-- Agregando propiedad AUTO_INCREMENT a PRIMARY KEY
+ALTER TABLE person
+    MODIFY person_id SMALLINT UNSIGNED AUTO_INCREMENT;
+
+-- Revisar modificaciones
+DESC person;
+
+-- Habilitar caracteristica de FK del SCHEMA
+SET FOREIGN_KEY_CHEKS=0;
