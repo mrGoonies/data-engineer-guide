@@ -84,3 +84,11 @@ UPDATE person
 -- Verificando datos del usuario con id igual a '1'
 SELECT * FROM person    
 WHERE person_id = 1;
+
+-- Eliminando registros de Susan en nuestra tabla 'person'
+DELETE FROM person
+    WHERE person_id = 2;
+
+-- Verificamos la eliminación del registro
+SELECT *
+FROM person;
