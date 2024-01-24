@@ -32,7 +32,7 @@ SHOW tables;
 DESC person;
 DESC favorite_food;
 
--- Deshaiblitar momentaneamente opciones de FOREIGN KEY del SCHEMA actual (esto permite modificar columnas de PK)
+-- Deshabilitar momentáneamente opciones de FOREIGN KEY del SCHEMA actual (esto permite modificar columnas de PK)
 SET FOREIGN_KEY_CHEKS=0;
 
 
@@ -43,5 +43,13 @@ ALTER TABLE person
 -- Revisar modificaciones
 DESC person;
 
--- Habilitar caracteristica de FK del SCHEMA
+-- Habilitar característica de FK del SCHEMA
 SET FOREIGN_KEY_CHEKS=1;
+
+-- Poblando tablas
+INSERT INTO person (person_id, fname, lname, eye_color, birthday)
+VALUES (NULL, 'William', 'Turner', 'BR', '1927-05-27');
+
+-- Verificando inserción de datos
+SELECT *
+FROM person;
