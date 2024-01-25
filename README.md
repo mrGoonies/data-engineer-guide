@@ -421,6 +421,144 @@ En la consulta anterior estamos multiplicando el campo language_id por 20 y adem
 
 #### Clausula FROM
 
+Esta clausula permite definir en que tabla obtendremos los datos. También dentro de esta sentencia podemos hacer uso de sub-consultas, este tipo de consulta es muy util cuando queremos obtener datos de una tabla que esta relacionada con otra tabla, tambien facilita la lectura de la consulta. Un ejemplo puede ser el siguiente:
+
+
+```sql
+SELECT
+    CONCAT(first_name, ', ', last_name) full_name
+FROM (
+    SELECT *
+    FROM customer
+    WHERE first_name = 'JESSIE'
+) cust;
+
+```
+```bash
+# Resultado esperado
++---------------+
+| full_name     |
++---------------+
+| JESSIE, BANKS |
+| JESSIE, MILAM |
++---------------+
+```
+##### Tabla temporal
+Este tipo de tablas son creadas en tiempo de ejecución y es utilizada para almacenar datos que sean visibles a las personas que no tienen los permisos para interactuar directamente con las tablas originales. Para crear una tabla temporal haremos uso de la clausula **CREATE TEMPORARY TABLE**. Un ejemplo puede ser el siguiente:
+
+```sql
+CREATE TEMPORARY TABLE IF NOT EXISTS customer_temp AS (
+    SELECT *
+    FROM customer
+    WHERE first_name = 'JESSIE'
+);
+```
+O podemos crear una desde cero haciendo uso de DDL (Data Definition Language), un ejemplo puede ser el siguiente:
+
+```sql
+CREATE TEMPORARY  TABLE IF NOT EXISTS customer_temp (
+    customer_id INT NOT NULL AUTO_INCREMENT,
+    store_id TINYINT UNSIGNED NOT NULL,
+    first_name VARCHAR(45) NOT NULL,
+    last_name VARCHAR(45) NOT NULL,
+    email VARCHAR(50) NULL,
+    address_id SMALLINT UNSIGNED NOT NULL,
+    active TINYINT NOT NULL DEFAULT 1,
+    create_date DATETIME NOT NULL,
+    last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (customer_id),
+    KEY idx_fk_store_id (store_id),
+    KEY idx_fk_address_id (address_id),
+    CONSTRAINT fk_customer_store FOREIGN KEY (store_id) REFERENCES store (store_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_customer_address FOREIGN KEY (address_id) REFERENCES address (address_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+```
+##### Tabla virtual o View
+Este tipo de tablas son creadas y es utilizada para almacenar datos que sean visibles a las personas que no tienen los permisos para interactuar directamente con las tablas originales. Similar a una tabla temporal, pero esta no almacena datos, solo almacena la consulta que se realizo. Para crear una tabla virtual haremos uso de la clausula **CREATE VIEW**. Un ejemplo puede ser el siguiente:
+
+```sql
+CREATE VIEW customer_view AS (
+    SELECT *
+    FROM customer
+    WHERE first_name = 'JESSIE'
+);
+```
+
+Este tipo de tabla es bastante util para facilitar el acceso a los datos e incluso para automatizar procesos, ya que podemos crear una tabla virtual que contenga los datos que necesitamos y luego crear un proceso que se ejecute cada cierto tiempo y que obtenga los datos de la tabla virtual y los almacene en una tabla temporal o tabla original.
+
+##### Enlaces de tablas
+En la actualidad existen distintas formas de relacionar tablas, las cuales giran alrededor de los JOINS, el cual se basa en la teoría de conjuntos. A continuación, se detallan los tipos de enlaces de tablas que se pueden utilizar en MySQL. Para poder entender mejor los ejemplos, utilizaremos las siguientes tablas:
+
+```sql
+SELECT
+    customer.first_name,
+    customer.last_name,
+    TIME(rental.rental_date) rental_time,
+FROM customer 
+INNER JOIN rental 
+    ON customer.customer_id = rental.customer_id
+WHERE DATE(rental.rental_date) = '2005-05-25';
+```
+
+En el caso anterior estamos obteniendo el nombre y apellido de los clientes que alquilaron una película el día 25 de mayo del 2005, para esto, estamos relacionando las tablas **customer** y **rental** por medio de la columna **customer_id**.
+
+#### Clausula WHERE
+Esta clausula nos permite filtrar los datos que queremos obtener de una tabla, por lo que es muy bueno para obtener datos específicos. Un ejemplo puede ser el siguiente:
+
+```sql
+SELECT title
+FROM film
+WHERE rating = 'G' AND rental_duration >= 3;
+```
+
+Si la consulta la traducimos al español, seria algo como lo siguiente:
+
+```sql
+Muéstrame el titulo de las películas que tengan una clasificación G y una duración de alquiler mayor o igual a 3.
+```
+
+#### Clausula GROUP BY
+Esta clausula nos permite agrupar los datos que queremos obtener de una tabla. Este tipo de clausula es muy bueno para obtener datos agregados, como lo puede ser la cantidad de películas que tenemos por clasificación y trabajara en conjunto con la clausula **HAVING**. Un ejemplo puede ser el siguiente:
+
+```sql
+SELECT 
+    c.first_name,
+    c.last_name,
+    COUNT(*)
+FROM customer c
+    INNER JOIN rental r
+        ON c.customer_id = r.customer_id
+GROUP BY c.first_name, c.last_name
+HAVING COUNT(*) >= 40;
+```
+
+Si la consulta la traducimos al español, seria algo como lo siguiente:
+
+```sql
+Muéstrame el nombre y apellido de los clientes que hayan alquilado 40 o mas películas.
+```
+
+#### Clausula ORDER BY
+Esta clausula nos permite ordenar los datos que queremos obtener de una tabla. Este tipo de clausula es muy bueno para obtener datos ordenados, como lo puede ser la cantidad de películas que tenemos por clasificación ordenadas de forma descendente y trabajara en conjunto con la palabra reservada **DESC**. Un ejemplo puede ser el siguiente:
+
+```sql
+SELECT 
+    rating,
+    COUNT(*)
+FROM film
+GROUP BY rating
+ORDER BY COUNT(*) DESC;
+```
+
+Esto traducido al español seria algo como lo siguiente:
+
+```sql
+Muéstrame la cantidad de películas que tenemos agrupadas por clasificación ordenadas de forma descendente.
+```
+
+
+
+
 # Contribuciones
 ¡Gracias por tu interés en contribuir al repositorio! Tu participación es importante ya que nos ayudas a todos los participantes del Bootcamp y también las personas nuevas que encuentren este repo, ademas contribuyes al aprendizaje conjunto de la comunidad. A continuación, se detallan las pautas para contribuir:
 
